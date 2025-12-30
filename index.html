@@ -124,91 +124,73 @@
 
     <script>
         const videos = [
-            // SPACE VIDEOS
-            {id: "2GWPOPSXGYI", title: "How Do Rockets Work?", channel: "NASA Space Place", category: "space"},
-            {id: "m4OvQIGDg4I", title: "Tour of the Solar System", channel: "NASA", category: "space"},
-            {id: "libKVRa01L8", title: "What is a Black Hole?", channel: "NASA Space Place", category: "space"},
-            {id: "g5fZHM1hoNU", title: "Mars Exploration", channel: "NASA", category: "space"},
-            {id: "b_CjXj6hK54", title: "The Planets Song", channel: "Kids Learning Tube", category: "space"},
-            {id: "oL_qATA8X-Y", title: "International Space Station Tour", channel: "NASA", category: "space"},
-            {id: "wcMLFMsIx4E", title: "Solar System for Kids", channel: "Free School", category: "space"},
-            {id: "nHEyyXV9xMg", title: "What is a Star?", channel: "SciShow Kids", category: "space"},
-            {id: "sffaBfkEXRI", title: "Moon Facts", channel: "SciShow Kids", category: "space"},
-            {id: "LS-VPyLaJFM", title: "Astronauts in Space", channel: "Free School", category: "space"},
-            
-            // F1 VIDEOS
-            {id: "Hm8oqlg8z4s", title: "How Formula 1 Cars Work", channel: "Chain Bear F1", category: "f1"},
-            {id: "VIbaG6FE-ac", title: "F1 Explained for Beginners", channel: "Formula 1", category: "f1"},
-            {id: "dtj9GDUWuJA", title: "How F1 Steering Wheels Work", channel: "Chain Bear F1", category: "f1"},
-            {id: "KV6KZW1m5Ac", title: "F1 Car Parts Explained", channel: "WTF1", category: "f1"},
-            {id: "C5F9Rz_L81c", title: "How F1 Pit Stops Work", channel: "Formula 1", category: "f1"},
-            {id: "Y4ynOAjVvdw", title: "F1 Tracks Around the World", channel: "Formula 1", category: "f1"},
-            {id: "YVKJZxCVG_A", title: "F1 Overtaking Explained", channel: "Chain Bear F1", category: "f1"},
-            {id: "iqr-vvjpGYg", title: "What Makes F1 Cars Fast", channel: "WTF1", category: "f1"},
-            {id: "oQ6VtXoTJZo", title: "F1 Race Start Explained", channel: "Chain Bear F1", category: "f1"},
-            
-            // RACE CARS VIDEOS
-            {id: "nP-nMZpLM1A", title: "How Engines Work", channel: "Donut Media", category: "cars"},
-            {id: "fGrbUbQQr0I", title: "Race Car Engineering", channel: "Donut Media", category: "cars"},
-            {id: "BQiJ9k5-f6Q", title: "Turbocharger Explained", channel: "Engineering Explained", category: "cars"},
-            {id: "k7-EYlsHNEQ", title: "How Racing Tires Work", channel: "Donut Media", category: "cars"},
-            {id: "3MRfOCFbMTk", title: "Aerodynamics of Race Cars", channel: "Engineering Explained", category: "cars"},
-            {id: "DEqXNfs_HhY", title: "Race Car Brakes", channel: "Donut Media", category: "cars"},
-            {id: "Eh8V0o1hFXo", title: "NASCAR Explained", channel: "Donut Media", category: "cars"},
-            {id: "DvMfMqVBRyA", title: "Rally Racing Explained", channel: "Donut Media", category: "cars"},
-            
-            // BIKES VIDEOS
-            {id: "dNVtMmLlnoE", title: "Learn to Ride a Bike", channel: "Global Cycling Network", category: "bikes"},
-            {id: "Iw5vFffQp_k", title: "Mountain Biking Basics", channel: "GMBN", category: "bikes"},
-            {id: "x_vLwF5go4Y", title: "BMX Tricks for Beginners", channel: "Scotty Cranmer", category: "bikes"},
-            {id: "EwBQx-wNW1U", title: "How to Fix a Flat Tire", channel: "Seth's Bike Hacks", category: "bikes"},
-            {id: "Wz2vVDCB_Vg", title: "Bike Gears Explained", channel: "GCN", category: "bikes"},
-            {id: "OMmG5N1v3gs", title: "Mountain Bike Skills", channel: "GMBN", category: "bikes"},
-            {id: "g4LAvxyuwbw", title: "Bike Jumping Tutorial", channel: "Seth's Bike Hacks", category: "bikes"},
-            {id: "gT_nb4dAYOg", title: "Road Cycling Tips", channel: "GCN", category: "bikes"},
-            
-            // MOTORCYCLES VIDEOS
-            {id: "sP1JFGOpC7c", title: "How Motorcycles Work", channel: "FortNine", category: "motorcycles"},
-            {id: "ALsQ-gj-Ayw", title: "Motorcycle Safety Tips", channel: "FortNine", category: "motorcycles"},
-            {id: "NNYkk1ZlBfw", title: "Different Types of Motorcycles", channel: "FortNine", category: "motorcycles"},
-            {id: "pMx-ZrLAZ5k", title: "How Motorcycle Engines Work", channel: "FortNine", category: "motorcycles"},
-            {id: "4RDfJxlBjR0", title: "Motorcycle Racing Explained", channel: "FortNine", category: "motorcycles"},
-            {id: "Iy7Y0r97Bz4", title: "Motorcycle Helmets Explained", channel: "FortNine", category: "motorcycles"},
-            
-            // CHESS VIDEOS
-            {id: "U4ogK0MIzqk", title: "Chess Basics", channel: "GothamChess", category: "chess"},
-            {id: "yO-HqbKzQz0", title: "How the Pieces Move", channel: "ChessKid", category: "chess"},
-            {id: "ej_fQfa5PR4", title: "Chess Tactics", channel: "GothamChess", category: "chess"},
-            {id: "p027ysBt0ZM", title: "Opening Principles", channel: "ChessKid", category: "chess"},
-            {id: "RYlHqRh6TYg", title: "Checkmate Patterns", channel: "GothamChess", category: "chess"},
-            {id: "6xYv8wvA1EI", title: "How to Win at Chess", channel: "ChessKid", category: "chess"},
-            {id: "B3LvFpA0qas", title: "Chess Strategy", channel: "GothamChess", category: "chess"},
-            {id: "Ao9iOeK_jvU", title: "Famous Chess Games", channel: "agadmator", category: "chess"},
-            {id: "pG7tFwH-Yrg", title: "Chess Puzzles", channel: "ChessKid", category: "chess"},
-            {id: "nH_lv0a5DCo", title: "Chess for Beginners", channel: "GothamChess", category: "chess"},
-            
-            // ART VIDEOS
-            {id: "Z84OKcDjHXg", title: "How to Draw a Race Car", channel: "Art for Kids Hub", category: "art"},
-            {id: "5zwBIP92up4", title: "Drawing Animals", channel: "Art for Kids Hub", category: "art"},
-            {id: "OnqD3HPJP4E", title: "How to Draw People", channel: "Art for Kids Hub", category: "art"},
-            {id: "KwLdQm6NweQ", title: "Color Mixing Basics", channel: "Art for Kids Hub", category: "art"},
-            {id: "jfmCNt4Hv1c", title: "Drawing Cartoon Characters", channel: "Draw So Cute", category: "art"},
-            {id: "4YGqH5MQcTk", title: "Watercolor Painting", channel: "Art for Kids Hub", category: "art"},
-            {id: "G3xgIJq-3EQ", title: "Draw with Letters", channel: "Muffalo Potato", category: "art"},
-            {id: "0UY2YKKQNQ0", title: "Drawing Cute Animals", channel: "Draw So Cute", category: "art"},
-            {id: "wQxd8l5Xx1s", title: "Landscape Drawing", channel: "Art for Kids Hub", category: "art"},
-            {id: "yzHxoP6FIis", title: "Drawing Dinosaurs", channel: "Art for Kids Hub", category: "art"},
-            {id: "SglvnSaTxj8", title: "Fun Doodles", channel: "Draw So Cute", category: "art"},
-            
-            // CAMERAS VIDEOS
-            {id: "wTeUAkBQW3k", title: "How Cameras Work", channel: "Basics Explained", category: "cameras"},
-            {id: "B7Dopv6kzJA", title: "Camera Parts Explained", channel: "TechnoBuffalo", category: "cameras"},
-            {id: "5yHiqG9Q1aw", title: "Photography Basics", channel: "Adorama", category: "cameras"},
-            {id: "V7z7BAZdt2M", title: "How Camera Lenses Work", channel: "Adorama", category: "cameras"},
-            {id: "8s4Q7_P7G4w", title: "Light and Photography", channel: "Adorama", category: "cameras"},
-            {id: "s1MwFM3t5yg", title: "Camera Focus Explained", channel: "Adorama", category: "cameras"},
-            {id: "yOxTyN96QqE", title: "Taking Better Photos", channel: "Adorama", category: "cameras"},
-        ];
+    // SPACE VIDEOS (Table 1)
+    {id: "UG3w3boGiS8", title: "How Do Rockets Work?", channel: "NASA Space Place", category: "space"},
+    {id: "LY6UutqVxD0", title: "Tour of the Solar System", channel: "NASA", category: "space"},
+    {id: "W_QV6vSQBXw", title: "What is a Black Hole?", channel: "NASA Space Place", category: "space"},
+    {id: "5qqsMjy8Rx0", title: "Mars Exploration", channel: "NASA", category: "space"},
+    {id: "21gRUx4brPI", title: "The Planets Song", channel: "Kids Learning Tube", category: "space"},
+    {id: "JgBgmw-2U8c", title: "International Space Station Tour", channel: "NASA", category: "space"},
+    {id: "PZiINkxRpEc", title: "Solar System for Kids", channel: "Free School", category: "space"},
+    {id: "AmVe5978zx0", title: "What is a Star?", channel: "SciShow Kids", category: "space"},
+    {id: "QW7GcLip53c", title: "Moon Facts", channel: "SciShow Kids", category: "space"},
+    {id: "8UxEsWpqBRw", title: "Astronauts", channel: "Free School", category: "space"},
+
+    // CARS VIDEOS (Table 2 - Automotive)
+    {id: "N_YXtc27gig", title: "How Engines Work", channel: "Donut Media", category: "cars"},
+    {id: "vaL6LFQHD-k", title: "Turbocharger Explained", channel: "Engineering Explained", category: "cars"},
+    {id: "shorts/GNrdDD_lTZo", title: "Aerodynamics", channel: "Engineering Explained", category: "cars"},
+    {id: "vPFTShRW_OM", title: "NASCAR", channel: "Donut Media", category: "cars"},
+    {id: "5Fzwm4m3ZFI", title: "Rally Racing", channel: "Donut Media", category: "cars"},
+    {id: "BX3SjTjXG0o", title: "Brakes", channel: "Science Garage", category: "cars"},
+
+    // MOTORCYCLES VIDEOS (Table 2 - Motorcycles)
+    {id: "vSZiKrtJ7Y0", title: "Motorcycles Work", channel: "FortNine", category: "motorcycles"},
+    {id: "shorts/QJlJVb-42n4", title: "Safety Tips", channel: "FortNine", category: "motorcycles"},
+    {id: "TmTc0UOjywI", title: "Types of Motorcycles", channel: "FortNine", category: "motorcycles"},
+    {id: "YcSDnvT5VZ0", title: "Motorcycle Engines", channel: "FortNine", category: "motorcycles"},
+    {id: "ecjBtn3Q02g", title: "Helmets", channel: "FortNine", category: "motorcycles"},
+
+    // F1 VIDEOS (Table 3)
+    {id: "OUhT93Yp0IU", title: "F1 Explained for Beginners", channel: "Formula 1", category: "f1"},
+    {id: "VJgdOMXhEj0", title: "Formula 1 Cars", channel: "Chain Bear", category: "f1"},
+    {id: "ErTxbgurQ8k", title: "F1 Explained", channel: "Formula 1", category: "f1"},
+    {id: "T5_7f6861Kw", title: "NASCAR", channel: "Up to Speed", category: "f1"},
+    {id: "0vsBPDsAlm0", title: "Formula 1 Car", channel: "Chain Bear", category: "f1"},
+    {id: "nzgwHYWxCdw", title: "Steering Wheel", channel: "Chain Bear", category: "f1"},
+    {id: "wsCriICZ-nA", title: "Pit Stops", channel: "Formula 1", category: "f1"},
+    {id: "8e51m9BaiBM", title: "Tracks", channel: "Formula 1", category: "f1"},
+    {id: "I8NinAV4Qsw", title: "Overtaking", channel: "Chain Bear", category: "f1"},
+    {id: "LthAt712oh8", title: "Fast", channel: "WTF1", category: "f1"},
+    {id: "EMAMa5bRGLo", title: "Race Start", channel: "Chain Bear", category: "f1"},
+    {id: "0FlWsnoexXU", title: "Parts", channel: "WTF1", category: "f1"},
+    {id: "CZD85WSAwLw", title: "Tracks Around the World", channel: "Formula 1", category: "f1"},
+
+    // BIKES VIDEOS (Table 4)
+    {id: "BHqWOgzMi-Y", title: "Learn to Ride a Bike", channel: "Global Cycling Network", category: "bikes"},
+    {id: "PdzbBmvksJc", title: "BMX Tricks for Beginners", channel: "Scotty Cranmer", category: "bikes"},
+    {id: "DxcaiWJiQls", title: "How to Fix a Flat Tire", channel: "Seth's Bike Hacks", category: "bikes"},
+    {id: "uITNmuBtmwQ", title: "Mountain Bike Skills", channel: "GMBN", category: "bikes"},
+    {id: "-wMLrDLXiw4", title: "Road Cycling Tips", channel: "GCN", category: "bikes"},
+    {id: "e5hEqwsb5GA", title: "Bike Gears", channel: "Global Cycling Network", category: "bikes"},
+    {id: "BRogvn_cOO0", title: "Jumping", channel: "Seth's Bike Hacks", category: "bikes"},
+    {id: "ID6io_clrr8", title: "How to Jump", channel: "Seth's Bike Hacks", category: "bikes"},
+
+    // CHESS VIDEOS (Table 5)
+    {id: "CEj9pxVCEaw", title: "Chess Basics", channel: "GothamChess", category: "chess"},
+    {id: "oDBO2B-pdN8", title: "Pieces Move", channel: "ChessKid", category: "chess"},
+    {id: "X21uL9lbHbw", title: "Tactics", channel: "GothamChess", category: "chess"},
+    {id: "UuwQNL44x8I", title: "Opening", channel: "ChessKid", category: "chess"},
+    {id: "_ITVKA0yj4w", title: "Checkmate", channel: "GothamChess", category: "chess"},
+    {id: "2knGokDB9rQ", title: "Win at Chess", channel: "ChessKid", category: "chess"},
+    {id: "i0Y2X2PkON4", title: "Strategy", channel: "GothamChess", category: "chess"},
+    {id: "81KW9-rPdjI", title: "Famous Games", channel: "agadmator", category: "chess"},
+    {id: "kSLGM-y-l-4", title: "Puzzles", channel: "ChessKid", category: "chess"},
+
+    // ART VIDEOS (Table 6)
+    {id: "P8oIihKV-4U", title: "Race Car", channel: "Art for Kids Hub", category: "art"},
+    {id: "d7ptI9uIeSo", title: "Cute Animals", channel: "Draw So Cute", category: "art"}
+];
 
         const videoGrid = document.getElementById('videoGrid');
         const categoryBtns = document.querySelectorAll('.category-btn');
