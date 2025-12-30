@@ -70,9 +70,57 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
+        .video-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            position: relative;
+            cursor: pointer;
+            background: #000;
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            background: rgba(255, 0, 0, 0.9);
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        
+        .play-button:hover {
+            background: rgba(255, 0, 0, 1);
+        }
+        
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-40%, -50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid white;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+        }
+        
         .video-player {
             width: 100%;
             aspect-ratio: 16/9;
+            display: none;
+        }
+        
+        .video-player.active {
+            display: block;
         }
         
         .video-info {
@@ -123,136 +171,48 @@
     </div>
 
     <script>
-        const videos = [
-    // SPACE VIDEOS (Table 1)
-    {id: "UG3w3boGiS8", title: "How Do Rockets Work?", channel: "NASA Space Place", category: "space"},
-    {id: "LY6UutqVxD0", title: "Tour of the Solar System", channel: "NASA", category: "space"},
-    {id: "W_QV6vSQBXw", title: "What is a Black Hole?", channel: "NASA Space Place", category: "space"},
-    {id: "5qqsMjy8Rx0", title: "Mars Exploration", channel: "NASA", category: "space"},
-    {id: "21gRUx4brPI", title: "The Planets Song", channel: "Kids Learning Tube", category: "space"},
-    {id: "JgBgmw-2U8c", title: "International Space Station Tour", channel: "NASA", category: "space"},
-    {id: "PZiINkxRpEc", title: "Solar System for Kids", channel: "Free School", category: "space"},
-    {id: "AmVe5978zx0", title: "What is a Star?", channel: "SciShow Kids", category: "space"},
-    {id: "QW7GcLip53c", title: "Moon Facts", channel: "SciShow Kids", category: "space"},
-    {id: "8UxEsWpqBRw", title: "Astronauts", channel: "Free School", category: "space"},
-
-    // CARS VIDEOS (Table 2 - Automotive)
-    {id: "N_YXtc27gig", title: "How Engines Work", channel: "Donut Media", category: "cars"},
-    {id: "vaL6LFQHD-k", title: "Turbocharger Explained", channel: "Engineering Explained", category: "cars"},
-    {id: "shorts/GNrdDD_lTZo", title: "Aerodynamics", channel: "Engineering Explained", category: "cars"},
-    {id: "vPFTShRW_OM", title: "NASCAR", channel: "Donut Media", category: "cars"},
-    {id: "5Fzwm4m3ZFI", title: "Rally Racing", channel: "Donut Media", category: "cars"},
-    {id: "BX3SjTjXG0o", title: "Brakes", channel: "Science Garage", category: "cars"},
-
-    // MOTORCYCLES VIDEOS (Table 2 - Motorcycles)
-    {id: "vSZiKrtJ7Y0", title: "Motorcycles Work", channel: "FortNine", category: "motorcycles"},
-    {id: "shorts/QJlJVb-42n4", title: "Safety Tips", channel: "FortNine", category: "motorcycles"},
-    {id: "TmTc0UOjywI", title: "Types of Motorcycles", channel: "FortNine", category: "motorcycles"},
-    {id: "YcSDnvT5VZ0", title: "Motorcycle Engines", channel: "FortNine", category: "motorcycles"},
-    {id: "ecjBtn3Q02g", title: "Helmets", channel: "FortNine", category: "motorcycles"},
-
-    // F1 VIDEOS (Table 3)
-    {id: "OUhT93Yp0IU", title: "F1 Explained for Beginners", channel: "Formula 1", category: "f1"},
-    {id: "VJgdOMXhEj0", title: "Formula 1 Cars", channel: "Chain Bear", category: "f1"},
-    {id: "ErTxbgurQ8k", title: "F1 Explained", channel: "Formula 1", category: "f1"},
-    {id: "T5_7f6861Kw", title: "NASCAR", channel: "Up to Speed", category: "f1"},
-    {id: "0vsBPDsAlm0", title: "Formula 1 Car", channel: "Chain Bear", category: "f1"},
-    {id: "nzgwHYWxCdw", title: "Steering Wheel", channel: "Chain Bear", category: "f1"},
-    {id: "wsCriICZ-nA", title: "Pit Stops", channel: "Formula 1", category: "f1"},
-    {id: "8e51m9BaiBM", title: "Tracks", channel: "Formula 1", category: "f1"},
-    {id: "I8NinAV4Qsw", title: "Overtaking", channel: "Chain Bear", category: "f1"},
-    {id: "LthAt712oh8", title: "Fast", channel: "WTF1", category: "f1"},
-    {id: "EMAMa5bRGLo", title: "Race Start", channel: "Chain Bear", category: "f1"},
-    {id: "0FlWsnoexXU", title: "Parts", channel: "WTF1", category: "f1"},
-    {id: "CZD85WSAwLw", title: "Tracks Around the World", channel: "Formula 1", category: "f1"},
-
-    // BIKES VIDEOS (Table 4)
-    {id: "BHqWOgzMi-Y", title: "Learn to Ride a Bike", channel: "Global Cycling Network", category: "bikes"},
-    {id: "PdzbBmvksJc", title: "BMX Tricks for Beginners", channel: "Scotty Cranmer", category: "bikes"},
-    {id: "DxcaiWJiQls", title: "How to Fix a Flat Tire", channel: "Seth's Bike Hacks", category: "bikes"},
-    {id: "uITNmuBtmwQ", title: "Mountain Bike Skills", channel: "GMBN", category: "bikes"},
-    {id: "-wMLrDLXiw4", title: "Road Cycling Tips", channel: "GCN", category: "bikes"},
-    {id: "e5hEqwsb5GA", title: "Bike Gears", channel: "Global Cycling Network", category: "bikes"},
-    {id: "BRogvn_cOO0", title: "Jumping", channel: "Seth's Bike Hacks", category: "bikes"},
-    {id: "ID6io_clrr8", title: "How to Jump", channel: "Seth's Bike Hacks", category: "bikes"},
-
-    // CHESS VIDEOS (Table 5)
-    {id: "CEj9pxVCEaw", title: "Chess Basics", channel: "GothamChess", category: "chess"},
-    {id: "oDBO2B-pdN8", title: "Pieces Move", channel: "ChessKid", category: "chess"},
-    {id: "X21uL9lbHbw", title: "Tactics", channel: "GothamChess", category: "chess"},
-    {id: "UuwQNL44x8I", title: "Opening", channel: "ChessKid", category: "chess"},
-    {id: "_ITVKA0yj4w", title: "Checkmate", channel: "GothamChess", category: "chess"},
-    {id: "2knGokDB9rQ", title: "Win at Chess", channel: "ChessKid", category: "chess"},
-    {id: "i0Y2X2PkON4", title: "Strategy", channel: "GothamChess", category: "chess"},
-    {id: "81KW9-rPdjI", title: "Famous Games", channel: "agadmator", category: "chess"},
-    {id: "kSLGM-y-l-4", title: "Puzzles", channel: "ChessKid", category: "chess"},
-
-    // ART VIDEOS (Table 6)
-    {id: "P8oIihKV-4U", title: "Race Car", channel: "Art for Kids Hub", category: "art"},
-    {id: "d7ptI9uIeSo", title: "Cute Animals", channel: "Draw So Cute", category: "art"},
-            {id: "UG3w3boGiS8", title: "How Do Rockets Work?", channel: "NASA Space Place", category: "space"},
-    {id: "libKVRa01L8", title: "Solar System Song", channel: "Kids Learning Tube", category: "space"},
-    {id: "k73Bs1l7-c8", title: "What is a Black Hole?", channel: "NASA Space Place", category: "space"},
-    {id: "v5W4q600eME", title: "Mars Exploration", channel: "Nat Geo Kids", category: "space"},
-    {id: "w36yxjwlzyw", title: "International Space Station Tour", channel: "ESA", category: "space"},
-    {id: "F2prtmcb-JY", title: "The Moon for Kids", channel: "Free School", category: "space"},
-
-    // CARS VIDEOS (Automotive Engineering)
-    {id: "G52dUQl938g", title: "How Car Engines Work", channel: "Science Garage", category: "cars"},
-    {id: "KQtMoXVcoA", title: "Turbos Explained", channel: "Science Garage", category: "cars"},
-    {id: "rRw4U-iiBpw", title: "Aerodynamics", channel: "Science Garage", category: "cars"},
-    {id: "fT2rD1f8lxc", title: "How Brakes Work", channel: "Science Garage", category: "cars"},
-    {id: "vPFTShRW_OM", title: "NASCAR vs F1", channel: "Donut Media", category: "cars"},
-
-    // MOTORCYCLES VIDEOS
-    {id: "YcSDnvT5VZ0", title: "How Motorcycle Engines Work", channel: "FortNine", category: "motorcycles"},
-    {id: "ecjBtn3Q02g", title: "Motorcycle Helmets", channel: "FortNine", category: "motorcycles"},
-    {id: "iO0JTwS7JFQ", title: "Types of Motorcycles", channel: "RevZilla", category: "motorcycles"},
-    {id: "DjJpnF_1_Io", title: "Dirt Bike Tricks", channel: "Moving Machines", category: "motorcycles"},
-
-    // F1 VIDEOS
-    {id: "OUhT93Yp0IU", title: "F1 Explained for Beginners", channel: "Formula 1", category: "f1"},
-    {id: "VJgdOMXhEj0", title: "F1 Cars Explained", channel: "Chain Bear", category: "f1"},
-    {id: "wsCriICZ-nA", title: "Pit Stops Explained", channel: "Formula 1", category: "f1"},
-    {id: "8e51m9BaiBM", title: "F1 Tracks", channel: "Formula 1", category: "f1"},
-    {id: "h7MjjfbD3v4", title: "Steering Wheel", channel: "Mercedes-AMG F1", category: "f1"},
-
-    // BIKES VIDEOS (Cycling)
-    {id: "ADskSDgcwBY", title: "How to Ride a Bike", channel: "Global Cycling Network", category: "bikes"},
-    {id: "PdzbBmvksJc", title: "BMX Tricks for Beginners", channel: "Scotty Cranmer", category: "bikes"},
-    {id: "e5hEqwsb5GA", title: "How Bike Gears Work", channel: "Global Cycling Network", category: "bikes"},
-    {id: "xQ_IQS3VKjA", title: "The Ridge (Mountain Bike)", channel: "Danny MacAskill", category: "bikes"},
-
-    // CHESS VIDEOS
-    {id: "f8F8v4-5O-U", title: "Chess Rules for Kids", channel: "ChessKid", category: "chess"},
-    {id: "CEj9pxVCEaw", title: "Chess Basics", channel: "GothamChess", category: "chess"},
-    {id: "t4y6x8-U4eA", title: "How The Pieces Move", channel: "ChessKid", category: "chess"},
-    {id: "_ITVKA0yj4w", title: "How to Checkmate", channel: "GothamChess", category: "chess"},
-
-    // ART VIDEOS (Drawing)
-    {id: "MuB9ZP8QtEU", title: "How To Draw A Race Car", channel: "Art for Kids Hub", category: "art"},
-    {id: "72q3F8pM08I", title: "How To Draw A Space Shuttle", channel: "Art for Kids Hub", category: "art"},
-    {id: "d7ptI9uIeSo", title: "How To Draw A Cute Puppy", channel: "Draw So Cute", category: "art"},
-
-    // CAMERAS VIDEOS
-    {id: "M2_9C3j801w", title: "How Do Cameras Work?", channel: "SciShow Kids", category: "cameras"},
-    {id: "qS1FmgPVLqw", title: "Inside a Camera", channel: "Veritasium", category: "cameras"},
-    {id: "40DP2_Qim_U", title: "Slow Motion Balloon Pop", channel: "The Slow Mo Guys", category: "cameras"}
-];
-
+        let videos = [];
         const videoGrid = document.getElementById('videoGrid');
         const categoryBtns = document.querySelectorAll('.category-btn');
+
+        // Function to load JSON data
+        async function loadVideos() {
+            try {
+                const response = await fetch('videos.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                videos = await response.json();
+                renderVideos();
+            } catch (error) {
+                console.error("Could not load videos:", error);
+                videoGrid.innerHTML = '<p style="text-align:center; color:white;">Error loading videos. Please check console.</p>';
+            }
+        }
+
+        function playVideo(videoId, index) {
+            const thumbnail = document.getElementById(`thumb-${index}`);
+            const player = document.getElementById(`player-${index}`);
+            
+            thumbnail.style.display = 'none';
+            player.classList.add('active');
+            player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        }
 
         function renderVideos(filter = 'all') {
             const filtered = filter === 'all' 
                 ? videos 
                 : videos.filter(v => v.category === filter);
             
-            videoGrid.innerHTML = filtered.map(video => `
+            videoGrid.innerHTML = filtered.map((video, index) => `
                 <div class="video-card">
+                    <div class="video-thumbnail" id="thumb-${index}" onclick="playVideo('${video.id}', ${index})">
+                        <img src="https://img.youtube.com/vi/${video.id}/maxresdefault.jpg" alt="${video.title}">
+                        <div class="play-button"></div>
+                    </div>
                     <iframe 
+                        id="player-${index}"
                         class="video-player"
-                        src="https://www.youtube.com/embed/${video.id}"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
@@ -274,7 +234,8 @@
             });
         });
 
-        renderVideos();
+        // Initialize loading
+        loadVideos();
     </script>
 </body>
 </html>
