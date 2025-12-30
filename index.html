@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Videos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .category-btn {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        .category-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .category-btn.active {
+            background: #ffd700;
+        }
+        
+        .videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+        
+        .video-info {
+            padding: 15px;
+        }
+        
+        .video-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .video-channel {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+        
+        .category-tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Learning Videos</h1>
+        
+        <div class="categories">
+            <button class="category-btn active" data-category="all">All Videos</button>
+            <button class="category-btn" data-category="space">🚀 Space</button>
+            <button class="category-btn" data-category="cars">🏎️ Race Cars</button>
+            <button class="category-btn" data-category="bikes">🚴 Bikes</button>
+            <button class="category-btn" data-category="motorcycles">🏍️ Motorcycles</button>
+            <button class="category-btn" data-category="f1">🏁 F1</button>
+            <button class="category-btn" data-category="chess">♟️ Chess</button>
+            <button class="category-btn" data-category="art">🎨 Art</button>
+            <button class="category-btn" data-category="cameras">📷 Cameras</button>
+        </div>
+        
+        <div class="videos" id="videoGrid"></div>
+    </div>
+
+    <script>
+        const videos = [
+            // SPACE VIDEOS
+            {id: "2GWPOPSXGYI", title: "How Do Rockets Work?", channel: "NASA Space Place", category: "space"},
+            {id: "m4OvQIGDg4I", title: "Tour of the Solar System", channel: "NASA", category: "space"},
+            {id: "libKVRa01L8", title: "What is a Black Hole?", channel: "NASA Space Place", category: "space"},
+            {id: "g5fZHM1hoNU", title: "Mars Exploration", channel: "NASA", category: "space"},
+            {id: "b_CjXj6hK54", title: "The Planets Song", channel: "Kids Learning Tube", category: "space"},
+            {id: "oL_qATA8X-Y", title: "International Space Station Tour", channel: "NASA", category: "space"},
+            {id: "wcMLFMsIx4E", title: "Solar System for Kids", channel: "Free School", category: "space"},
+            {id: "nHEyyXV9xMg", title: "What is a Star?", channel: "SciShow Kids", category: "space"},
+            {id: "sffaBfkEXRI", title: "Moon Facts", channel: "SciShow Kids", category: "space"},
+            {id: "LS-VPyLaJFM", title: "Astronauts in Space", channel: "Free School", category: "space"},
+            
+            // F1 VIDEOS
+            {id: "Hm8oqlg8z4s", title: "How Formula 1 Cars Work", channel: "Chain Bear F1", category: "f1"},
+            {id: "VIbaG6FE-ac", title: "F1 Explained for Beginners", channel: "Formula 1", category: "f1"},
+            {id: "dtj9GDUWuJA", title: "How F1 Steering Wheels Work", channel: "Chain Bear F1", category: "f1"},
+            {id: "KV6KZW1m5Ac", title: "F1 Car Parts Explained", channel: "WTF1", category: "f1"},
+            {id: "C5F9Rz_L81c", title: "How F1 Pit Stops Work", channel: "Formula 1", category: "f1"},
+            {id: "Y4ynOAjVvdw", title: "F1 Tracks Around the World", channel: "Formula 1", category: "f1"},
+            {id: "YVKJZxCVG_A", title: "F1 Overtaking Explained", channel: "Chain Bear F1", category: "f1"},
+            {id: "iqr-vvjpGYg", title: "What Makes F1 Cars Fast", channel: "WTF1", category: "f1"},
+            {id: "oQ6VtXoTJZo", title: "F1 Race Start Explained", channel: "Chain Bear F1", category: "f1"},
+            
+            // RACE CARS VIDEOS
+            {id: "nP-nMZpLM1A", title: "How Engines Work", channel: "Donut Media", category: "cars"},
+            {id: "fGrbUbQQr0I", title: "Race Car Engineering", channel: "Donut Media", category: "cars"},
+            {id: "BQiJ9k5-f6Q", title: "Turbocharger Explained", channel: "Engineering Explained", category: "cars"},
+            {id: "k7-EYlsHNEQ", title: "How Racing Tires Work", channel: "Donut Media", category: "cars"},
+            {id: "3MRfOCFbMTk", title: "Aerodynamics of Race Cars", channel: "Engineering Explained", category: "cars"},
+            {id: "DEqXNfs_HhY", title: "Race Car Brakes", channel: "Donut Media", category: "cars"},
+            {id: "Eh8V0o1hFXo", title: "NASCAR Explained", channel: "Donut Media", category: "cars"},
+            {id: "DvMfMqVBRyA", title: "Rally Racing Explained", channel: "Donut Media", category: "cars"},
+            
+            // BIKES VIDEOS
+            {id: "dNVtMmLlnoE", title: "Learn to Ride a Bike", channel: "Global Cycling Network", category: "bikes"},
+            {id: "Iw5vFffQp_k", title: "Mountain Biking Basics", channel: "GMBN", category: "bikes"},
+            {id: "x_vLwF5go4Y", title: "BMX Tricks for Beginners", channel: "Scotty Cranmer", category: "bikes"},
+            {id: "EwBQx-wNW1U", title: "How to Fix a Flat Tire", channel: "Seth's Bike Hacks", category: "bikes"},
+            {id: "Wz2vVDCB_Vg", title: "Bike Gears Explained", channel: "GCN", category: "bikes"},
+            {id: "OMmG5N1v3gs", title: "Mountain Bike Skills", channel: "GMBN", category: "bikes"},
+            {id: "g4LAvxyuwbw", title: "Bike Jumping Tutorial", channel: "Seth's Bike Hacks", category: "bikes"},
+            {id: "gT_nb4dAYOg", title: "Road Cycling Tips", channel: "GCN", category: "bikes"},
+            
+            // MOTORCYCLES VIDEOS
+            {id: "sP1JFGOpC7c", title: "How Motorcycles Work", channel: "FortNine", category: "motorcycles"},
+            {id: "ALsQ-gj-Ayw", title: "Motorcycle Safety Tips", channel: "FortNine", category: "motorcycles"},
+            {id: "NNYkk1ZlBfw", title: "Different Types of Motorcycles", channel: "FortNine", category: "motorcycles"},
+            {id: "pMx-ZrLAZ5k", title: "How Motorcycle Engines Work", channel: "FortNine", category: "motorcycles"},
+            {id: "4RDfJxlBjR0", title: "Motorcycle Racing Explained", channel: "FortNine", category: "motorcycles"},
+            {id: "Iy7Y0r97Bz4", title: "Motorcycle Helmets Explained", channel: "FortNine", category: "motorcycles"},
+            
+            // CHESS VIDEOS
+            {id: "U4ogK0MIzqk", title: "Chess Basics", channel: "GothamChess", category: "chess"},
+            {id: "yO-HqbKzQz0", title: "How the Pieces Move", channel: "ChessKid", category: "chess"},
+            {id: "ej_fQfa5PR4", title: "Chess Tactics", channel: "GothamChess", category: "chess"},
+            {id: "p027ysBt0ZM", title: "Opening Principles", channel: "ChessKid", category: "chess"},
+            {id: "RYlHqRh6TYg", title: "Checkmate Patterns", channel: "GothamChess", category: "chess"},
+            {id: "6xYv8wvA1EI", title: "How to Win at Chess", channel: "ChessKid", category: "chess"},
+            {id: "B3LvFpA0qas", title: "Chess Strategy", channel: "GothamChess", category: "chess"},
+            {id: "Ao9iOeK_jvU", title: "Famous Chess Games", channel: "agadmator", category: "chess"},
+            {id: "pG7tFwH-Yrg", title: "Chess Puzzles", channel: "ChessKid", category: "chess"},
+            {id: "nH_lv0a5DCo", title: "Chess for Beginners", channel: "GothamChess", category: "chess"},
+            
+            // ART VIDEOS
+            {id: "Z84OKcDjHXg", title: "How to Draw a Race Car", channel: "Art for Kids Hub", category: "art"},
+            {id: "5zwBIP92up4", title: "Drawing Animals", channel: "Art for Kids Hub", category: "art"},
+            {id: "OnqD3HPJP4E", title: "How to Draw People", channel: "Art for Kids Hub", category: "art"},
+            {id: "KwLdQm6NweQ", title: "Color Mixing Basics", channel: "Art for Kids Hub", category: "art"},
+            {id: "jfmCNt4Hv1c", title: "Drawing Cartoon Characters", channel: "Draw So Cute", category: "art"},
+            {id: "4YGqH5MQcTk", title: "Watercolor Painting", channel: "Art for Kids Hub", category: "art"},
+            {id: "G3xgIJq-3EQ", title: "Draw with Letters", channel: "Muffalo Potato", category: "art"},
+            {id: "0UY2YKKQNQ0", title: "Drawing Cute Animals", channel: "Draw So Cute", category: "art"},
+            {id: "wQxd8l5Xx1s", title: "Landscape Drawing", channel: "Art for Kids Hub", category: "art"},
+            {id: "yzHxoP6FIis", title: "Drawing Dinosaurs", channel: "Art for Kids Hub", category: "art"},
+            {id: "SglvnSaTxj8", title: "Fun Doodles", channel: "Draw So Cute", category: "art"},
+            
+            // CAMERAS VIDEOS
+            {id: "wTeUAkBQW3k", title: "How Cameras Work", channel: "Basics Explained", category: "cameras"},
+            {id: "B7Dopv6kzJA", title: "Camera Parts Explained", channel: "TechnoBuffalo", category: "cameras"},
+            {id: "5yHiqG9Q1aw", title: "Photography Basics", channel: "Adorama", category: "cameras"},
+            {id: "V7z7BAZdt2M", title: "How Camera Lenses Work", channel: "Adorama", category: "cameras"},
+            {id: "8s4Q7_P7G4w", title: "Light and Photography", channel: "Adorama", category: "cameras"},
+            {id: "s1MwFM3t5yg", title: "Camera Focus Explained", channel: "Adorama", category: "cameras"},
+            {id: "yOxTyN96QqE", title: "Taking Better Photos", channel: "Adorama", category: "cameras"},
+        ];
+
+        const videoGrid = document.getElementById('videoGrid');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+
+        function renderVideos(filter = 'all') {
+            const filtered = filter === 'all' 
+                ? videos 
+                : videos.filter(v => v.category === filter);
+            
+            videoGrid.innerHTML = filtered.map(video => `
+                <div class="video-card">
+                    <iframe 
+                        class="video-player"
+                        src="https://www.youtube.com/embed/${video.id}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-channel">${video.channel}</div>
+                        <span class="category-tag">${video.category}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderVideos(btn.dataset.category);
+            });
+        });
+
+        renderVideos();
+    </script>
+</body>
+</html>
